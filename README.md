@@ -10,8 +10,8 @@ LINQ for Go with type parameters
 - [ ] [OrderBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderby)
 - [ ] [OrderByDescending](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderbydescending)
 - [ ] [ThenBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenby)
-- [ ] [ThenByDescending](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenbydescending?view=net-6.0)
-- [ ] [Reverse](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse?view=net-6.0)
+- [ ] [ThenByDescending](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenbydescending)
+- [ ] [Reverse](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse)
 
 ### [Set Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/set-operations)
 
@@ -41,7 +41,7 @@ LINQ for Go with type parameters
 - [ ] [SelectMany](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectmany)
 - [ ] [Zip](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip)
 
-### [Partitioning Data](
+### [Partitioning Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/partitioning-data)
 
 - [ ] [Skip](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip)
 - [ ] [SkipWhile](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skipwhile)
