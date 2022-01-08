@@ -27,7 +27,7 @@
 #### [Filtering Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/filtering-data)
 
 - [ ] [OfType](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.oftype)
-- [ ] [Where](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where)
+- [x] [Where](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.where)
 
 #### [Quantifier Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/quantifier-operations)
 
@@ -37,7 +37,7 @@
 
 #### [Projection Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/projection-operations)
 
-- [ ] [Select](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select)
+- [x] [Select](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select)
 - [ ] [SelectMany](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectmany)
 - [ ] [Zip](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip)
 
