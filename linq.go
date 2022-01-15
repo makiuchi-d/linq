@@ -17,12 +17,6 @@ type Enumerator[T any] interface {
 	// Reset() error
 }
 
-// KeyValue pair as an element of map[K]V
-type KeyValue[K comparable, V any] struct {
-	Key   K
-	Value V
-}
-
 // Error : LINQ error type.
 type Error string
 
