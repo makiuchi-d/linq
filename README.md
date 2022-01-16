@@ -31,7 +31,7 @@
 
 #### [Quantifier Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/quantifier-operations)
 
-- [ ] [All](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
+- [x] [All](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
 - [ ] [Any](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
 - [ ] [Contains](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.contains)
 
