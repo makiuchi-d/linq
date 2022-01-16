@@ -1,7 +1,7 @@
 package linq
 
 // All determines whether all elements of a sequence satisfy a condition.
-func All[T any](src Enumerator[T], cond func(v T) (bool, error)) (bool, error) {
+func All[T any](src Enumerator[T], pred func(v T) (bool, error)) (bool, error) {
 	for {
 		v, err := src.Next()
 		if err != nil {
@@ -10,7 +10,7 @@ func All[T any](src Enumerator[T], cond func(v T) (bool, error)) (bool, error) {
 			}
 			return false, err
 		}
-		ok, err := cond(v)
+		ok, err := pred(v)
 		if err != nil {
 			return false, err
 		}

@@ -32,7 +32,7 @@
 #### [Quantifier Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/quantifier-operations)
 
 - [x] [All](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
-- [ ] [Any](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
+- [x] [Any](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
 - [ ] [Contains](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.contains)
 
 #### [Projection Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/projection-operations)
