@@ -33,7 +33,7 @@
 
 - [x] [All](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.all)
 - [x] [Any](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any)
-- [ ] [Contains](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.contains)
+- [x] [Contains](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.contains)
 
 #### [Projection Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/projection-operations)
 
