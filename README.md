@@ -38,7 +38,7 @@
 #### [Projection Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/projection-operations)
 
 - [x] [Select](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.select)
-- [ ] [SelectMany](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectmany)
+- [x] [SelectMany](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.selectmany)
 - [ ] [Zip](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip)
 
 #### [Partitioning Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/partitioning-data)
