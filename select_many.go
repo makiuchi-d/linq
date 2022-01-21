@@ -21,14 +21,14 @@ func (e *selectManyEnumerator[T, U, V]) Next() (V, error) {
 	if e.cur == nil {
 		t, err := e.src.Next()
 		if err != nil {
-			var v V
-			return v, err // includes case of EndOfCollection
+			var d V
+			return d, err // includes case of EndOfCollection
 		}
 
 		c, err := e.csel(t)
 		if err != nil {
-			var v V
-			return v, err
+			var d V
+			return d, err
 		}
 
 		e.cur = c
@@ -40,8 +40,8 @@ func (e *selectManyEnumerator[T, U, V]) Next() (V, error) {
 			e.cur = nil
 			return e.Next()
 		}
-		var v V
-		return v, err
+		var d V
+		return d, err
 	}
 
 	return e.rsel(u)
