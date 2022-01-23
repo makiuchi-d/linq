@@ -11,7 +11,7 @@ func TestChunk(t *testing.T) {
 
 	src := []int{1, 2, 3, 4, 5, 6, 7, 8}
 	e := linq.Chunk(linq.FromSlice(src), 3)
-	r, err := linq.ToSlice(linq.Select(e, linq.ToSlice[int]))
+	r, err := linq.ToSlice(e)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}

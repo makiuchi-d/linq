@@ -6,14 +6,14 @@ type chunkEnumerator[T any] struct {
 }
 
 // Chunk splits the elements of a sequence into chunks of size at most `size`.
-func Chunk[T any](src Enumerator[T], size int) Enumerator[Enumerator[T]] {
+func Chunk[T any](src Enumerator[T], size int) Enumerator[[]T] {
 	return &chunkEnumerator[T]{
 		src:  src,
 		size: size,
 	}
 }
 
-func (e *chunkEnumerator[T]) Next() (Enumerator[T], error) {
+func (e *chunkEnumerator[T]) Next() ([]T, error) {
 	s := make([]T, 0, e.size)
 
 	for i := 0; i < e.size; i++ {
@@ -31,5 +31,5 @@ func (e *chunkEnumerator[T]) Next() (Enumerator[T], error) {
 		return nil, EOC
 	}
 
-	return FromSlice(s), nil
+	return s, nil
 }
