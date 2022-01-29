@@ -15,8 +15,8 @@
 
 #### [Set Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/set-operations)
 
-- [ ] [Distinct](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinct)
-- [ ] [DistinctBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinctby)
+- [x] [Distinct](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinct)
+- [x] [DistinctBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinctby)
 - [ ] [Except](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.except)
 - [ ] [ExceptBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.exceptby)
 - [ ] [Intersect](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect)
