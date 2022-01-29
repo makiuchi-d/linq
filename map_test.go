@@ -59,3 +59,24 @@ func TestSliceToMap(t *testing.T) {
 		t.Fatalf("wants: %#v, got %#v", exp, m)
 	}
 }
+
+func TestToMapFunc(t *testing.T) {
+	s := []byte{5, 10, 15, 20}
+	e1 := linq.FromSlice(s)
+	m, err := linq.ToMapFunc(e1, func(v byte) (int, string, error) {
+		return int(v), fmt.Sprintf("%02x", v), nil
+	})
+	if err != nil {
+		t.Fatalf("%v", err)
+	}
+
+	exp := map[int]string{
+		5:  "05",
+		10: "0a",
+		15: "0f",
+		20: "14",
+	}
+	if !reflect.DeepEqual(m, exp) {
+		t.Fatalf("wants: %#v, got %#v", exp, m)
+	}
+}
