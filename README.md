@@ -51,7 +51,7 @@
 
 #### [Join Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/join-operations)
 
-- [ ] [Join](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join)
+- [x] [Join](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join)
 - [ ] [GroupJoin](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupjoin)
 
 #### [Grouping Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/grouping-data)
@@ -63,7 +63,7 @@
 
 - [ ] [DefaultIfEmpty](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.defaultifempty)
 - [ ] [Empty](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.empty)
-- [ ] [Range](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.range)
+- [x] [Range](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.range)
 - [ ] [Repeat](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.repeat)
 
 #### [Equality Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/equality-operations)
