@@ -10,11 +10,10 @@ func Select[T, U any](src Enumerator[T], selector func(v T) (U, error)) Enumerat
 	return &selectEnumerator[T, U]{src: src, sel: selector}
 }
 
-func (e *selectEnumerator[T, U]) Next() (U, error) {
+func (e *selectEnumerator[T, U]) Next() (def U, _ error) {
 	v, err := e.src.Next()
 	if err != nil {
-		var u U
-		return u, err
+		return def, err
 	}
 
 	return e.sel(v)

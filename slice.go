@@ -26,11 +26,11 @@ func ToSlice[T any](src Enumerator[T]) ([]T, error) {
 	return s, nil
 }
 
-func (e *sliceEnumerator[T]) Next() (v T, err error) {
+func (e *sliceEnumerator[T]) Next() (def T, _ error) {
 	if e.i >= len(e.s) {
-		return v, EOC
+		return def, EOC
 	}
-	v = e.s[e.i]
+	v := e.s[e.i]
 	e.i++
 	return v, nil
 }

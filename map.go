@@ -21,10 +21,9 @@ func FromMap[T ~map[K]V, K comparable, V any](m T) Enumerator[KeyValue[K, V]] {
 	return &mapEnumerator[K, V]{m: m, k: keys}
 }
 
-func (e *mapEnumerator[K, V]) Next() (KeyValue[K, V], error) {
+func (e *mapEnumerator[K, V]) Next() (def KeyValue[K, V], _ error) {
 	if e.i >= len(e.k) {
-		var kv KeyValue[K, V]
-		return kv, EOC
+		return def, EOC
 	}
 	k := e.k[e.i]
 	e.i++

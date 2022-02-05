@@ -17,18 +17,16 @@ func SelectMany[T, U, V any](src Enumerator[T], collectionSelector func(T) (Enum
 	}
 }
 
-func (e *selectManyEnumerator[T, U, V]) Next() (V, error) {
+func (e *selectManyEnumerator[T, U, V]) Next() (def V, _ error) {
 	if e.cur == nil {
 		t, err := e.src.Next()
 		if err != nil {
-			var d V
-			return d, err // includes case of EndOfCollection
+			return def, err // includes case of EndOfCollection
 		}
 
 		c, err := e.csel(t)
 		if err != nil {
-			var d V
-			return d, err
+			return def, err
 		}
 
 		e.cur = c
@@ -40,8 +38,7 @@ func (e *selectManyEnumerator[T, U, V]) Next() (V, error) {
 			e.cur = nil
 			return e.Next()
 		}
-		var d V
-		return d, err
+		return def, err
 	}
 
 	return e.rsel(u)

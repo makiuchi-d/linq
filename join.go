@@ -29,12 +29,11 @@ func Join[T1, T2, U any, K comparable](
 	}
 }
 
-func (e *joinEnumerator[T1, T2, U, K]) Next() (U, error) {
+func (e *joinEnumerator[T1, T2, U, K]) Next() (def U, _ error) {
 	if e.t1 == nil {
 		t1, err := e.eOut.Next()
 		if err != nil {
-			var u U
-			return u, err
+			return def, err
 		}
 		e.t1 = &t1
 	}
@@ -42,16 +41,14 @@ func (e *joinEnumerator[T1, T2, U, K]) Next() (U, error) {
 	if e.mt2 == nil {
 		m, err := innerMap(e.eIn, e.ksIn)
 		if err != nil {
-			var u U
-			return u, err
+			return def, err
 		}
 		e.mt2 = m
 	}
 
 	k, err := e.ksOut(*e.t1)
 	if err != nil {
-		var u U
-		return u, err
+		return def, err
 	}
 
 	s := e.mt2[k]

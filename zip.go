@@ -15,17 +15,15 @@ func Zip[T, U, V any](first Enumerator[T], second Enumerator[U], resultSelector 
 	}
 }
 
-func (e *zipEnumerator[T, U, V]) Next() (V, error) {
-	var d V
-
+func (e *zipEnumerator[T, U, V]) Next() (def V, _ error) {
 	t, err := e.first.Next()
 	if err != nil {
-		return d, err
+		return def, err
 	}
 
 	u, err := e.second.Next()
 	if err != nil {
-		return d, err
+		return def, err
 	}
 
 	return e.sel(t, u)

@@ -10,17 +10,16 @@ func Where[T any](src Enumerator[T], pred func(v T) (bool, error)) Enumerator[T]
 	return &whereEnumerator[T]{src: src, pred: pred}
 }
 
-func (e *whereEnumerator[T]) Next() (T, error) {
+func (e *whereEnumerator[T]) Next() (def T, _ error) {
 	for {
 		v, err := e.src.Next()
 		if err != nil {
-			return v, err
+			return def, err
 		}
 
 		ok, err := e.pred(v)
 		if err != nil {
-			var v T
-			return v, err
+			return def, err
 		}
 		if ok {
 			return v, nil

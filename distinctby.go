@@ -15,17 +15,16 @@ func DistinctBy[T any, K comparable](src Enumerator[T], keySelector func(v T) (K
 	}
 }
 
-func (e *distinctByEnumerator[T, K]) Next() (T, error) {
+func (e *distinctByEnumerator[T, K]) Next() (def T, _ error) {
 	for {
 		v, err := e.src.Next()
 		if err != nil {
-			return v, err
+			return def, err
 		}
 
 		k, err := e.keysel(v)
 		if err != nil {
-			var d T
-			return d, err
+			return def, err
 		}
 
 		_, ok := e.keymap[k]
