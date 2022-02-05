@@ -2,47 +2,29 @@ package linq
 
 type distinctEnumerator[T any] struct {
 	src     Enumerator[T]
-	equals  func(T, T) (bool, error)
-	hash    func(T) (int, error)
-	hashMap map[int]T
+	hashMap *hashMap[int, T]
 }
 
 // Distinct returns distinct elements from a sequence by using the specified comparer functions.
 func Distinct[T any](src Enumerator[T], equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerator[T] {
 	return &distinctEnumerator[T]{
 		src:     src,
-		equals:  equals,
-		hash:    getHashCode,
-		hashMap: make(map[int]T),
+		hashMap: newHashMap(getHashCode, equals),
 	}
 }
 
-func (e *distinctEnumerator[T]) Next() (T, error) {
+func (e *distinctEnumerator[T]) Next() (def T, _ error) {
 	for {
 		v, err := e.src.Next()
 		if err != nil {
-			var d T
-			return d, err
+			return def, err
 		}
 
-		h, err := e.hash(v)
+		added, err := e.hashMap.add(v)
 		if err != nil {
-			var d T
-			return d, err
+			return def, err
 		}
-
-		t, ok := e.hashMap[h]
-		if !ok {
-			e.hashMap[h] = v
-			return v, nil
-		}
-
-		eq, err := e.equals(t, v)
-		if err != nil {
-			var d T
-			return d, nil
-		}
-		if !eq {
+		if added {
 			return v, nil
 		}
 	}

@@ -1,10 +1,6 @@
 // LINQ
 package linq
 
-import (
-	"errors"
-)
-
 // Enumerator[T] is a queryable collection
 type Enumerator[T any] interface {
 
@@ -25,8 +21,4 @@ const EOC Error = "End of the collection"
 
 func (e Error) Error() string {
 	return string(e)
-}
-
-func isEOC(err error) bool {
-	return errors.Is(err, EOC)
 }
