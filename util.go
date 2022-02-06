@@ -55,6 +55,22 @@ func (hm *hashMap[H, V]) add(v V) (bool, error) {
 	return true, nil
 }
 
+func (hm *hashMap[H, V]) addAll(e Enumerator[V]) error {
+	for {
+		v, err := e.Next()
+		if err != nil {
+			if isEOC(err) {
+				return nil
+			}
+			return err
+		}
+
+		if _, err = hm.add(v); err != nil {
+			return err
+		}
+	}
+}
+
 type keyMap[K comparable, V any] struct {
 	m  map[K]struct{}
 	ks func(v V) (K, error)
