@@ -19,8 +19,8 @@
 - [x] [DistinctBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.distinctby)
 - [x] [Except](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.except)
 - [x] [ExceptBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.exceptby)
-- [ ] [Intersect](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect)
-- [ ] [IntersectBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersectby)
+- [x] [Intersect](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect)
+- [x] [IntersectBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersectby)
 - [ ] [Union](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union)
 - [ ] [UnionBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.unionby)
 
