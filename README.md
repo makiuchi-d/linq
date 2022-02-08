@@ -21,8 +21,8 @@
 - [x] [ExceptBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.exceptby)
 - [x] [Intersect](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersect)
 - [x] [IntersectBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.intersectby)
-- [ ] [Union](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union)
-- [ ] [UnionBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.unionby)
+- [x] [Union](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.union)
+- [x] [UnionBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.unionby)
 
 #### [Filtering Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/filtering-data)
 
