@@ -43,8 +43,9 @@
 
 #### [Partitioning Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/partitioning-data)
 
-- [ ] [Skip](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip)
-- [ ] [SkipWhile](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skipwhile)
+- [x] [Skip](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip)
+- [x] [SkipLast](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skiplast)
+- [x] [SkipWhile](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skipwhile)
 - [ ] [Take](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.take)
 - [ ] [TakeWhile](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takewhile)
 - [x] [Chunk](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.chunk)
