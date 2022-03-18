@@ -46,8 +46,9 @@
 - [x] [Skip](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skip)
 - [x] [SkipLast](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skiplast)
 - [x] [SkipWhile](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.skipwhile)
-- [ ] [Take](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.take)
-- [ ] [TakeWhile](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takewhile)
+- [x] [Take](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.take)
+- [x] [TakeLast](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.take)
+- [x] [TakeWhile](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.takewhile)
 - [x] [Chunk](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.chunk)
 
 #### [Join Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/join-operations)

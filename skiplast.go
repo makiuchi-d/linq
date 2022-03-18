@@ -7,6 +7,7 @@ type skipLastEnumerator[T any] struct {
 	i   int
 }
 
+// SkipLast returns a new enumerable collection that contains the elements from source with the last count elements of the source collection omitted.
 func SkipLast[T any](src Enumerator[T], count int) Enumerator[T] {
 	return &skipLastEnumerator[T]{src: src, cnt: count}
 }
