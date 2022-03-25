@@ -7,11 +7,11 @@
 
 #### [Sorting Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/sorting-data)
 
-- [ ] [OrderBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderby)
-- [ ] [OrderByDescending](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderbydescending)
-- [ ] [ThenBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenby)
-- [ ] [ThenByDescending](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenbydescending)
-- [ ] [Reverse](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse)
+- [x] [OrderBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderby)
+- [x] [OrderByDescending](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderbydescending)
+- [x] [ThenBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenby)
+- [x] [ThenByDescending](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.thenbydescending)
+- [x] [Reverse](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.reverse)
 
 #### [Set Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/set-operations)
 
