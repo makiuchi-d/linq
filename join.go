@@ -1,26 +1,27 @@
 package linq
 
-type joinEnumerator[T1, T2, U any, K comparable] struct {
-	eOut  Enumerator[T1]
-	eIn   Enumerator[T2]
-	ksOut func(T1) (K, error)
-	ksIn  func(T2) (K, error)
-	rSel  func(T1, T2) (U, error)
+type joinEnumerator[S1, S2, T any, K comparable] struct {
+	eOut  Enumerator[S1]
+	eIn   Enumerator[S2]
+	ksOut func(S1) (K, error)
+	ksIn  func(S2) (K, error)
+	rSel  func(S1, S2) (T, error)
 
-	t1  *T1
-	mt2 map[K][]T2
+	s1  *S1
+	ks1 K
+	ms2 map[K][]S2
 	i   int
 }
 
 // Join correlates the elements of two sequences based on matching keys.
-func Join[T1, T2, U any, K comparable](
-	outer Enumerator[T1],
-	inner Enumerator[T2],
-	outerKeySelector func(T1) (K, error),
-	innerKeySelector func(T2) (K, error),
-	resultSelector func(T1, T2) (U, error),
-) Enumerator[U] {
-	return &joinEnumerator[T1, T2, U, K]{
+func Join[S1, S2, T any, K comparable](
+	outer Enumerator[S1],
+	inner Enumerator[S2],
+	outerKeySelector func(S1) (K, error),
+	innerKeySelector func(S2) (K, error),
+	resultSelector func(S1, S2) (T, error),
+) Enumerator[T] {
+	return &joinEnumerator[S1, S2, T, K]{
 		eOut:  outer,
 		eIn:   inner,
 		ksOut: outerKeySelector,
@@ -29,46 +30,46 @@ func Join[T1, T2, U any, K comparable](
 	}
 }
 
-func (e *joinEnumerator[T1, T2, U, K]) Next() (def U, _ error) {
-	if e.t1 == nil {
-		t1, err := e.eOut.Next()
+func (e *joinEnumerator[S1, S2, T, K]) Next() (def T, _ error) {
+	if e.s1 == nil {
+		s1, err := e.eOut.Next()
 		if err != nil {
 			return def, err
 		}
-		e.t1 = &t1
+		ks1, err := e.ksOut(s1)
+		if err != nil {
+			return def, err
+		}
+		e.s1 = &s1
+		e.ks1 = ks1
 	}
 
-	if e.mt2 == nil {
+	if e.ms2 == nil {
 		m, err := innerMap(e.eIn, e.ksIn)
 		if err != nil {
 			return def, err
 		}
-		e.mt2 = m
+		e.ms2 = m
 	}
 
-	k, err := e.ksOut(*e.t1)
-	if err != nil {
-		return def, err
-	}
-
-	s := e.mt2[k]
+	s := e.ms2[e.ks1]
 
 	if e.i >= len(s) {
 		e.i = 0
-		e.t1 = nil
+		e.s1 = nil
 		return e.Next()
 	}
 
 	i := e.i
 	e.i++
 
-	return e.rSel(*e.t1, s[i])
+	return e.rSel(*e.s1, s[i])
 }
 
-func innerMap[T2 any, K comparable](e Enumerator[T2], ks func(T2) (K, error)) (map[K][]T2, error) {
-	m := make(map[K][]T2)
+func innerMap[S2 any, K comparable](e Enumerator[S2], ks func(S2) (K, error)) (map[K][]S2, error) {
+	m := make(map[K][]S2)
 	for {
-		t2, err := e.Next()
+		s2, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return m, nil
@@ -76,10 +77,10 @@ func innerMap[T2 any, K comparable](e Enumerator[T2], ks func(T2) (K, error)) (m
 			return nil, err
 		}
 
-		k, err := ks(t2)
+		k, err := ks(s2)
 		if err != nil {
 			return nil, err
 		}
-		m[k] = append(m[k], t2)
+		m[k] = append(m[k], s2)
 	}
 }
