@@ -1,16 +1,16 @@
 package linq
 
-type intersectEnumerator[T any] struct {
+type intersectEnumerator[T any, H comparable] struct {
 	fst  Enumerator[T]
 	snd  Enumerator[T]
 	eq   func(T, T) (bool, error)
-	hash func(T) (int, error)
-	hmap *hashMap[int, T]
+	hash func(T) (H, error)
+	hmap *hashMap[H, T]
 }
 
 // Intersect produces the set intersection of two sequences by using the specified comparer functions.
 func Intersect[T any](first, second Enumerator[T], equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerator[T] {
-	return &intersectEnumerator[T]{
+	return &intersectEnumerator[T, int]{
 		fst:  first,
 		snd:  second,
 		eq:   equals,
@@ -18,7 +18,17 @@ func Intersect[T any](first, second Enumerator[T], equals func(T, T) (bool, erro
 	}
 }
 
-func (e *intersectEnumerator[T]) Next() (def T, _ error) {
+// IntersectBy produces the set intersection of two sequences according to a specified key selector function.
+func IntersectBy[T any, K comparable](first, second Enumerator[T], keySelector func(v T) (K, error)) Enumerator[T] {
+	return &intersectEnumerator[T, K]{
+		fst:  first,
+		snd:  second,
+		eq:   alwaysEqual[T],
+		hash: keySelector,
+	}
+}
+
+func (e *intersectEnumerator[T, H]) Next() (def T, _ error) {
 	if e.hmap == nil {
 		hm := newHashMap(e.hash, e.eq)
 		if err := hm.addAll(e.snd); err != nil {

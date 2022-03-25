@@ -1,21 +1,30 @@
 package linq
 
-type unionEnumerator[T any] struct {
+type unionEnumerator[T any, H comparable] struct {
 	fst  Enumerator[T]
 	snd  Enumerator[T]
-	hmap *hashMap[int, T]
+	hmap *hashMap[H, T]
 }
 
 // Union produces the set union of two sequences by using the specified comparer functions.
 func Union[T any](first, second Enumerator[T], equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerator[T] {
-	return &unionEnumerator[T]{
+	return &unionEnumerator[T, int]{
 		fst:  first,
 		snd:  second,
 		hmap: newHashMap(getHashCode, equals),
 	}
 }
 
-func (e *unionEnumerator[T]) Next() (def T, _ error) {
+// UnionBy produces the set union of two sequences according to a specified key selector function.
+func UnionBy[T any, K comparable](first, second Enumerator[T], keySelector func(v T) (K, error)) Enumerator[T] {
+	return &unionEnumerator[T, K]{
+		fst:  first,
+		snd:  second,
+		hmap: newKeyMap(keySelector),
+	}
+}
+
+func (e *unionEnumerator[T, H]) Next() (def T, _ error) {
 	if e.fst != nil {
 		v, err := e.fst.Next()
 		if err == nil {
