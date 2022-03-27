@@ -58,7 +58,7 @@
 
 #### [Grouping Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/grouping-data)
 
-- [ ] [GroupBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupby)
+- [x] [GroupBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupby)
 - [ ] [ToLookup](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.tolookup)
 
 #### [Generation Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/generation-operations)
