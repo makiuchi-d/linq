@@ -54,7 +54,7 @@
 #### [Join Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/join-operations)
 
 - [x] [Join](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.join)
-- [ ] [GroupJoin](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupjoin)
+- [x] [GroupJoin](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.groupjoin)
 
 #### [Grouping Data](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/grouping-data)
 

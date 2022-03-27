@@ -28,6 +28,14 @@ func alwaysEqual[T any](_, _ T) (bool, error) {
 	return true, nil
 }
 
+func alwaysFalse[T any](_, _ T) (bool, error) {
+	return false, nil
+}
+
+func (hm *hashMap[H, V]) gets(h H) []V {
+	return hm.m[h]
+}
+
 func (hm *hashMap[H, V]) has(v V) (bool, error) {
 	h, err := hm.hash(v)
 	if err != nil {
