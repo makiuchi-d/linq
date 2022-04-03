@@ -101,7 +101,7 @@
 #### [Aggregation Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/aggregation-operations)
 
 - [x] [Aggregate](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate)
-- [ ] [Average](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.average)
+- [x] [Average](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.average)
 - [ ] [Count](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.count)
 - [ ] [LongCount](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.longcount)
 - [ ] [Max](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.max)
