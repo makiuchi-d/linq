@@ -96,7 +96,7 @@
 
 #### [Concatenation Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/concatenation-operations)
 
-- [ ] [Concat](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.concat)
+- [x] [Concat](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.concat)
 
 #### [Aggregation Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/aggregation-operations)
 
