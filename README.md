@@ -74,8 +74,8 @@
 
 #### [Element Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/element-operations)
 
-- [ ] [ElementAt](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementat)
-- [ ] [ElementAtOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementatordefault)
+- [x] [ElementAt](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementat)
+- [x] [ElementAtOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementatordefault)
 - [ ] [First](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.first)
 - [ ] [FirstOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstordefault)
 - [ ] [Last](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.last)

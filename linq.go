@@ -16,8 +16,13 @@ type Enumerator[T any] interface {
 // Error : LINQ error type.
 type Error string
 
-// EOC : End of the collection
-const EOC Error = "End of the collection"
+const (
+	// EOC : End of the collection
+	EOC Error = "End of the collection"
+
+	// OutOfRange : Index out of range
+	OutOfRange Error = "Out of range"
+)
 
 func (e Error) Error() string {
 	return string(e)

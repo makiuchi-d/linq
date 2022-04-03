@@ -6,6 +6,10 @@ func isEOC(err error) bool {
 	return errors.Is(err, EOC)
 }
 
+func isOutOfRange(err error) bool {
+	return errors.Is(err, OutOfRange)
+}
+
 type hashMap[H comparable, V any] struct {
 	m    map[H][]V
 	hash func(V) (H, error)
