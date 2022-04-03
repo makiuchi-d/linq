@@ -25,10 +25,10 @@ func Last[T any](src Enumerator[T], pred func(T) (bool, error)) (def T, _ error)
 }
 
 // LastOrDefault returns the last element of a sequence that satisfies a condition, or a specified default value if no such element is found.
-func LastOrDefault[T any](src Enumerator[T], pred func(T) (bool, error), def T) (T, error) {
+func LastOrDefault[T any](src Enumerator[T], pred func(T) (bool, error), defaultValue T) (T, error) {
 	v, err := Last(src, pred)
 	if isInvalidOperation(err) {
-		return def, nil
+		return defaultValue, nil
 	}
 	return v, err
 }

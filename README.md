@@ -80,8 +80,8 @@
 - [x] [FirstOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstordefault)
 - [x] [Last](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.last)
 - [x] [LastOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.lastordefault)
-- [ ] [Single](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single)
-- [ ] [SingleOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.singleordefault)
+- [x] [Single](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single)
+- [x] [SingleOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.singleordefault)
 
 #### [Converting Data Types](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/converting-data-types)
 
