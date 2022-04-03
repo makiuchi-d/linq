@@ -10,6 +10,10 @@ func isOutOfRange(err error) bool {
 	return errors.Is(err, OutOfRange)
 }
 
+func isInvalidOperation(err error) bool {
+	return errors.Is(err, InvalidOperation)
+}
+
 type hashMap[H comparable, V any] struct {
 	m    map[H][]V
 	hash func(V) (H, error)

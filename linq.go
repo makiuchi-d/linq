@@ -17,11 +17,14 @@ type Enumerator[T any] interface {
 type Error string
 
 const (
-	// EOC : End of the collection
+	// EOC : End of the collection.
 	EOC Error = "End of the collection"
 
-	// OutOfRange : Index out of range
+	// OutOfRange : Index out of range.
 	OutOfRange Error = "Out of range"
+
+	// InvalidOperation : Invalid operation such as no element satisfying the condition.
+	InvalidOperation Error = "Invalid operation"
 )
 
 func (e Error) Error() string {

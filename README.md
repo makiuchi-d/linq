@@ -76,10 +76,10 @@
 
 - [x] [ElementAt](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementat)
 - [x] [ElementAtOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.elementatordefault)
-- [ ] [First](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.first)
-- [ ] [FirstOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstordefault)
-- [ ] [Last](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.last)
-- [ ] [LastOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.lastordefault)
+- [x] [First](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.first)
+- [x] [FirstOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstordefault)
+- [x] [Last](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.last)
+- [x] [LastOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.lastordefault)
 - [ ] [Single](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.single)
 - [ ] [SingleOrDefault](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.singleordefault)
 
