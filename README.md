@@ -66,7 +66,7 @@
 - [x] [DefaultIfEmpty](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.defaultifempty)
 - [x] [Empty](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.empty)
 - [x] [Range](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.range)
-- [ ] [Repeat](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.repeat)
+- [x] [Repeat](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.repeat)
 
 #### [Equality Operations](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/equality-operations)
 
