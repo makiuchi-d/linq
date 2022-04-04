@@ -33,7 +33,7 @@ func (e *groupJoinEnumerator[S1, S2, T, K]) Next() (def T, _ error) {
 		return def, err
 	}
 	if e.ms2 == nil {
-		e.ms2 = newHashMap(e.ksIn, alwaysFalse[S2])
+		e.ms2 = newHashMap(e.ksIn, alwaysNotEqual[S2])
 		if err := e.ms2.addAll(e.eIn); err != nil {
 			return def, err
 		}

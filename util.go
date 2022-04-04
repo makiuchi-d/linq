@@ -36,7 +36,7 @@ func alwaysEqual[T any](_, _ T) (bool, error) {
 	return true, nil
 }
 
-func alwaysFalse[T any](_, _ T) (bool, error) {
+func alwaysNotEqual[T any](_, _ T) (bool, error) {
 	return false, nil
 }
 

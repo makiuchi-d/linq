@@ -23,7 +23,7 @@ func ExceptBy[T any, K comparable](first, second Enumerator[T], keySelector func
 	return &exceptEnumerator[T, K]{
 		fst:  first,
 		snd:  second,
-		eq:   func(T, T) (bool, error) { return true, nil },
+		eq:   alwaysEqual[T],
 		hash: keySelector,
 	}
 }
