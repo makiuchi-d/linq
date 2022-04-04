@@ -108,4 +108,4 @@
 - [x] [MaxBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.maxby)
 - [x] [Min](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.min)
 - [x] [MinBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.minby)
-- [ ] [Sum](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.sum)
+- [x] [Sum](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.sum)
