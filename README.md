@@ -102,7 +102,7 @@
 
 - [x] [Aggregate](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate)
 - [x] [Average](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.average)
-- [ ] [Count](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.count)
+- [x] [Count](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.count)
 - [ ] [LongCount](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.longcount)
 - [ ] [Max](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.max)
 - [ ] [MaxBy](https://docs.microsoft.com/en-us/dotnet/api/system.linq.enumerable.maxby)
