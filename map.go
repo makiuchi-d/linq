@@ -14,14 +14,17 @@ type mapEnumerator[K comparable, V any] struct {
 
 // FromMap generates an Enumerator[T] from a map.
 func FromMap[T ~map[K]V, K comparable, V any](m T) Enumerator[KeyValue[K, V]] {
-	keys := make([]K, 0, len(m))
-	for k := range m {
-		keys = append(keys, k)
-	}
-	return &mapEnumerator[K, V]{m: m, k: keys}
+	return &mapEnumerator[K, V]{m: m}
 }
 
 func (e *mapEnumerator[K, V]) Next() (def KeyValue[K, V], _ error) {
+	if e.k == nil {
+		ks := make([]K, 0, len(e.m))
+		for k := range e.m {
+			ks = append(ks, k)
+		}
+		e.k = ks
+	}
 	if e.i >= len(e.k) {
 		return def, EOC
 	}

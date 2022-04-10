@@ -30,7 +30,7 @@ func (e *sliceEnumerator[T]) Next() (def T, _ error) {
 	if e.i >= len(e.s) {
 		return def, EOC
 	}
-	v := e.s[e.i]
+	i := e.i
 	e.i++
-	return v, nil
+	return e.s[i], nil
 }
