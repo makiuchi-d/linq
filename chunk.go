@@ -6,10 +6,12 @@ type chunkEnumerator[T any] struct {
 }
 
 // Chunk splits the elements of a sequence into chunks of size at most `size`.
-func Chunk[T any](src Enumerator[T], size int) Enumerator[[]T] {
-	return &chunkEnumerator[T]{
-		src:  src,
-		size: size,
+func Chunk[T any, E IEnumerable[T]](src E, size int) Enumerable[[]T] {
+	return func() Enumerator[[]T] {
+		return &chunkEnumerator[T]{
+			src:  src(),
+			size: size,
+		}
 	}
 }
 
