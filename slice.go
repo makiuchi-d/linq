@@ -5,16 +5,22 @@ type sliceEnumerator[T any] struct {
 	i int
 }
 
-// FromSlice generates an Enumerator[T] from a slice.
-func FromSlice[S ~[]T, T any](s S) Enumerator[T] {
-	return &sliceEnumerator[T]{s: []T(s)}
+// FromSlice generates an IEnumerable[T] from a slice.
+func FromSlice[S ~[]T, T any](s S) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &sliceEnumerator[T]{s: []T(s)}
+	}
 }
 
-// ToSlice creates a slice from an Enumerator[T]
-func ToSlice[T any](src Enumerator[T]) ([]T, error) {
+// ToSlice creates a slice from an IEnumerable[T]
+func ToSlice[T any, E IEnumerable[T]](src E) ([]T, error) {
+	return toSlice(src())
+}
+
+func toSlice[T any](e Enumerator[T]) ([]T, error) {
 	s := make([]T, 0)
 	for {
-		v, err := src.Next()
+		v, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				break

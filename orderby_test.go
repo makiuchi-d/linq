@@ -3,7 +3,7 @@ package linq_test
 import (
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestOrderBy(t *testing.T) {
@@ -13,7 +13,7 @@ func TestOrderBy(t *testing.T) {
 
 	e1 := linq.FromSlice(fruits)
 	e2 := linq.OrderBy(e1, func(v string) (int, error) { return len(v), nil })
-	r, err := linq.ToSlice[string](e2)
+	r, err := linq.ToSlice(e2)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
@@ -32,7 +32,7 @@ func TestOrderByDescending(t *testing.T) {
 
 	e1 := linq.FromSlice(fruits)
 	e2 := linq.OrderByDescending(e1, func(v string) (int, error) { return len(v), nil })
-	r, err := linq.ToSlice[string](e2)
+	r, err := linq.ToSlice(e2)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
@@ -52,7 +52,7 @@ func TestThenBy(t *testing.T) {
 	e1 := linq.FromSlice(fruits)
 	e2 := linq.OrderByDescending(e1, func(v string) (int, error) { return len(v), nil })
 	e3 := linq.ThenBy(e2, func(v string) (string, error) { return v, nil })
-	r, err := linq.ToSlice[string](e3)
+	r, err := linq.ToSlice(e3)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
@@ -75,7 +75,7 @@ func TestThenByDescending(t *testing.T) {
 	e1 := linq.FromSlice(fruits)
 	e2 := linq.OrderBy(e1, func(v string) (int, error) { return len(v), nil })
 	e3 := linq.ThenByDescending(e2, func(v string) (string, error) { return v, nil })
-	r, err := linq.ToSlice[string](e3)
+	r, err := linq.ToSlice(e3)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}

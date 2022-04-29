@@ -6,8 +6,10 @@ type whereEnumerator[T any] struct {
 }
 
 // Where filters a sequence of values based on a predicate.
-func Where[T any](src Enumerator[T], pred func(v T) (bool, error)) Enumerator[T] {
-	return &whereEnumerator[T]{src: src, pred: pred}
+func Where[T any, E IEnumerable[T]](src E, pred func(v T) (bool, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &whereEnumerator[T]{src: src(), pred: pred}
+	}
 }
 
 func (e *whereEnumerator[T]) Next() (def T, _ error) {
