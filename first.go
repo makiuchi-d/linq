@@ -1,8 +1,8 @@
 package linq
 
-// First returns the first element in a sequence that satisfies a specified condition.
-func First[T any](src Enumerator[T], pred func(T) (bool, error)) (def T, _ error) {
-	e := Where(src, pred)
+// First returns the first element in a sequence
+func First[T any, E IEnumerable[T]](src E) (def T, _ error) {
+	e := src()
 	v, err := e.Next()
 	if err != nil {
 		if isEOC(err) {
@@ -13,9 +13,9 @@ func First[T any](src Enumerator[T], pred func(T) (bool, error)) (def T, _ error
 	return v, nil
 }
 
-// FirstOrDefault returns the first element of the sequence that satisfies a condition, or a specified default value if no such element is found.
-func FirstOrDefault[T any](src Enumerator[T], pred func(T) (bool, error), defaultValue T) (T, error) {
-	v, err := First(src, pred)
+// FirstOrDefault returns the first element of the sequence, or a specified default value if no such element is found.
+func FirstOrDefault[T any, E IEnumerable[T]](src E, defaultValue T) (T, error) {
+	v, err := First(src)
 	if err != nil {
 		if isInvalidOperation(err) {
 			err = nil
