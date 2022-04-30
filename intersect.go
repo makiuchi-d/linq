@@ -9,22 +9,26 @@ type intersectEnumerator[T any, H comparable] struct {
 }
 
 // Intersect produces the set intersection of two sequences by using the specified comparer functions.
-func Intersect[T any](first, second Enumerator[T], equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerator[T] {
-	return &intersectEnumerator[T, int]{
-		fst:  first,
-		snd:  second,
-		eq:   equals,
-		hash: getHashCode,
+func Intersect[T any, E IEnumerable[T]](first, second E, equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &intersectEnumerator[T, int]{
+			fst:  first(),
+			snd:  second(),
+			eq:   equals,
+			hash: getHashCode,
+		}
 	}
 }
 
 // IntersectBy produces the set intersection of two sequences according to a specified key selector function.
-func IntersectBy[T any, K comparable](first, second Enumerator[T], keySelector func(v T) (K, error)) Enumerator[T] {
-	return &intersectEnumerator[T, K]{
-		fst:  first,
-		snd:  second,
-		eq:   alwaysEqual[T],
-		hash: keySelector,
+func IntersectBy[T any, K comparable, E IEnumerable[T]](first, second E, keySelector func(v T) (K, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &intersectEnumerator[T, K]{
+			fst:  first(),
+			snd:  second(),
+			eq:   alwaysEqual[T],
+			hash: keySelector,
+		}
 	}
 }
 

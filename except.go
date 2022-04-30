@@ -9,22 +9,26 @@ type exceptEnumerator[T any, H comparable] struct {
 }
 
 // Except produces the set difference of two sequences by using the specified comparer functions.
-func Except[T any](first, second Enumerator[T], equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerator[T] {
-	return &exceptEnumerator[T, int]{
-		fst:  first,
-		snd:  second,
-		eq:   equals,
-		hash: getHashCode,
+func Except[T any, E IEnumerable[T]](first, second E, equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &exceptEnumerator[T, int]{
+			fst:  first(),
+			snd:  second(),
+			eq:   equals,
+			hash: getHashCode,
+		}
 	}
 }
 
 // ExceptBy produces the set difference of two sequences according to a specified key selector function.
-func ExceptBy[T any, K comparable](first, second Enumerator[T], keySelector func(v T) (K, error)) Enumerator[T] {
-	return &exceptEnumerator[T, K]{
-		fst:  first,
-		snd:  second,
-		eq:   alwaysEqual[T],
-		hash: keySelector,
+func ExceptBy[T any, K comparable, E IEnumerable[T]](first, second E, keySelector func(v T) (K, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &exceptEnumerator[T, K]{
+			fst:  first(),
+			snd:  second(),
+			eq:   alwaysEqual[T],
+			hash: keySelector,
+		}
 	}
 }
 

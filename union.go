@@ -7,20 +7,24 @@ type unionEnumerator[T any, H comparable] struct {
 }
 
 // Union produces the set union of two sequences by using the specified comparer functions.
-func Union[T any](first, second Enumerator[T], equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerator[T] {
-	return &unionEnumerator[T, int]{
-		fst:  first,
-		snd:  second,
-		hmap: newHashMap(getHashCode, equals),
+func Union[T any, E IEnumerable[T]](first, second E, equals func(T, T) (bool, error), getHashCode func(T) (int, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &unionEnumerator[T, int]{
+			fst:  first(),
+			snd:  second(),
+			hmap: newHashMap(getHashCode, equals),
+		}
 	}
 }
 
 // UnionBy produces the set union of two sequences according to a specified key selector function.
-func UnionBy[T any, K comparable](first, second Enumerator[T], keySelector func(v T) (K, error)) Enumerator[T] {
-	return &unionEnumerator[T, K]{
-		fst:  first,
-		snd:  second,
-		hmap: newKeyMap(keySelector),
+func UnionBy[T any, K comparable, E IEnumerable[T]](first, second E, keySelector func(v T) (K, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &unionEnumerator[T, K]{
+			fst:  first(),
+			snd:  second(),
+			hmap: newKeyMap(keySelector),
+		}
 	}
 }
 
