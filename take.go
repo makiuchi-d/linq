@@ -6,8 +6,10 @@ type takeEnumerator[T any] struct {
 }
 
 // Take returns a specified number of contiguous elements from the start of a sequence.
-func Take[T any](src Enumerator[T], count int) Enumerator[T] {
-	return &takeEnumerator[T]{src: src, cnt: count}
+func Take[T any, E IEnumerable[T]](src E, count int) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &takeEnumerator[T]{src: src(), cnt: count}
+	}
 }
 
 func (e *takeEnumerator[T]) Next() (def T, _ error) {
@@ -24,8 +26,10 @@ type takeWhileEnumerator[T any] struct {
 }
 
 // TakeWhile returns elements from a sequence as long as a specified condition is true, and then skips the remaining elements.
-func TakeWhile[T any](src Enumerator[T], pred func(T) (bool, error)) Enumerator[T] {
-	return &takeWhileEnumerator[T]{src: src, pred: pred}
+func TakeWhile[T any, E IEnumerable[T]](src E, pred func(T) (bool, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &takeWhileEnumerator[T]{src: src(), pred: pred}
+	}
 }
 
 func (e *takeWhileEnumerator[T]) Next() (def T, _ error) {
@@ -52,8 +56,10 @@ type takeLastEnumerator[T any] struct {
 }
 
 // TakeLast returns a new enumerable collection that contains the last count elements from source.
-func TakeLast[T any](src Enumerator[T], count int) Enumerator[T] {
-	return &takeLastEnumerator[T]{src: src, cnt: count}
+func TakeLast[T any, E IEnumerable[T]](src E, count int) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &takeLastEnumerator[T]{src: src(), cnt: count}
+	}
 }
 
 func (e *takeLastEnumerator[T]) Next() (def T, _ error) {
