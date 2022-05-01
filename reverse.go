@@ -7,15 +7,17 @@ type reverseEnumerator[T any] struct {
 }
 
 // Reverse inverts the order of the elements in a sequence.
-func Reverse[T any](src Enumerator[T]) Enumerator[T] {
-	return &reverseEnumerator[T]{
-		src: src,
+func Reverse[T any, E IEnumerable[T]](src E) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &reverseEnumerator[T]{
+			src: src(),
+		}
 	}
 }
 
 func (e *reverseEnumerator[T]) Next() (def T, _ error) {
 	if e.s == nil {
-		s, err := ToSlice(e.src)
+		s, err := toSlice(e.src)
 		if err != nil {
 			return def, err
 		}
