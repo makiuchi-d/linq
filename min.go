@@ -3,8 +3,9 @@ package linq
 import "golang.org/x/exp/constraints"
 
 // Min returns the minimum value in a sequence of values.
-func Min[T constraints.Ordered](src Enumerator[T]) (def T, _ error) {
-	min, err := src.Next()
+func Min[T constraints.Ordered, E IEnumerable[T]](src E) (def T, _ error) {
+	e := src()
+	min, err := e.Next()
 	if err != nil {
 		if isEOC(err) {
 			err = InvalidOperation
@@ -12,7 +13,7 @@ func Min[T constraints.Ordered](src Enumerator[T]) (def T, _ error) {
 		return def, err
 	}
 	for {
-		v, err := src.Next()
+		v, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return min, nil
@@ -29,8 +30,9 @@ func Min[T constraints.Ordered](src Enumerator[T]) (def T, _ error) {
 }
 
 // MinBy returns the minimum value in a generic sequence according to a specified key selector function.
-func MinBy[T any, K constraints.Ordered](src Enumerator[T], keySelector func(T) (K, error)) (def T, _ error) {
-	min, err := src.Next()
+func MinBy[T any, K constraints.Ordered, E IEnumerable[T]](src E, keySelector func(T) (K, error)) (def T, _ error) {
+	e := src()
+	min, err := e.Next()
 	if err != nil {
 		if isEOC(err) {
 			err = InvalidOperation
@@ -42,7 +44,7 @@ func MinBy[T any, K constraints.Ordered](src Enumerator[T], keySelector func(T) 
 		return def, err
 	}
 	for {
-		v, err := src.Next()
+		v, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return min, nil
@@ -60,8 +62,9 @@ func MinBy[T any, K constraints.Ordered](src Enumerator[T], keySelector func(T) 
 }
 
 // MinByFunc returns the minimum value in a generic sequence according to a comparer function.
-func MinByFunc[T any](src Enumerator[T], less func(a, b T) (bool, error)) (def T, _ error) {
-	min, err := src.Next()
+func MinByFunc[T any, E IEnumerable[T]](src E, less func(a, b T) (bool, error)) (def T, _ error) {
+	e := src()
+	min, err := e.Next()
 	if err != nil {
 		if isEOC(err) {
 			err = InvalidOperation
@@ -69,7 +72,7 @@ func MinByFunc[T any](src Enumerator[T], less func(a, b T) (bool, error)) (def T
 		return def, err
 	}
 	for {
-		v, err := src.Next()
+		v, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return min, nil

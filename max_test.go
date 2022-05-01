@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestMax(t *testing.T) {
