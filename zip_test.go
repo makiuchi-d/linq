@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestZip(t *testing.T) {

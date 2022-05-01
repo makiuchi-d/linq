@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestSelectMany(t *testing.T) {
@@ -16,7 +16,9 @@ func TestSelectMany(t *testing.T) {
 
 	e1 := linq.FromSlice(s)
 	e2 := linq.SelectMany(e1,
-		func(e []string) (linq.Enumerator[string], error) { return linq.FromSlice(e), nil },
+		func(e []string) (linq.OrderedEnumerable[string], error) {
+			return linq.OrderBy(linq.FromSlice(e), func(s string) (string, error) { return s, nil }), nil
+		},
 		func(v string) (int, error) { return len(v), nil })
 
 	r, err := linq.ToSlice(e2)
