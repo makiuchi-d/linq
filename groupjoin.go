@@ -5,25 +5,27 @@ type groupJoinEnumerator[S1, S2, T any, K comparable] struct {
 	eIn   Enumerator[S2]
 	ksOut func(S1) (K, error)
 	ksIn  func(S2) (K, error)
-	rSel  func(S1, Enumerator[S2]) (T, error)
+	rSel  func(S1, Enumerable[S2]) (T, error)
 
 	ms2 *hashMap[K, S2]
 }
 
 // GroupJoin correlates the elements of two sequences based on equality of keys and groups the results.
-func GroupJoin[S1, S2, T any, K comparable](
-	outer Enumerator[S1],
-	inner Enumerator[S2],
+func GroupJoin[S1, S2, T any, K comparable, E1 IEnumerable[S1], E2 IEnumerable[S2]](
+	outer E1,
+	inner E2,
 	outerKeySelector func(S1) (K, error),
 	innerKeySelector func(S2) (K, error),
-	resultSelector func(S1, Enumerator[S2]) (T, error),
-) Enumerator[T] {
-	return &groupJoinEnumerator[S1, S2, T, K]{
-		eOut:  outer,
-		eIn:   inner,
-		ksOut: outerKeySelector,
-		ksIn:  innerKeySelector,
-		rSel:  resultSelector,
+	resultSelector func(S1, Enumerable[S2]) (T, error),
+) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &groupJoinEnumerator[S1, S2, T, K]{
+			eOut:  outer(),
+			eIn:   inner(),
+			ksOut: outerKeySelector,
+			ksIn:  innerKeySelector,
+			rSel:  resultSelector,
+		}
 	}
 }
 

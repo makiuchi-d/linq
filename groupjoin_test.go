@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestGroupJoin(t *testing.T) {
@@ -34,7 +34,7 @@ func TestGroupJoin(t *testing.T) {
 			people, pets,
 			func(p *Person) (*Person, error) { return p, nil },
 			func(p *Pet) (*Person, error) { return p.Owner, nil },
-			func(person *Person, pets linq.Enumerator[*Pet]) ([]string, error) {
+			func(person *Person, pets linq.Enumerable[*Pet]) ([]string, error) {
 				names, err := linq.ToSlice(
 					linq.Select(pets, func(p *Pet) (string, error) { return p.Name, nil }))
 				if err != nil {

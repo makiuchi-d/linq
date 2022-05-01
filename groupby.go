@@ -1,22 +1,13 @@
 package linq
 
 // Grouping represents a collection of objects that have a common key.
-type Grouping[K comparable, T any] interface {
-	Enumerator[T]
-	Key() K
-}
-
-type grouping[K comparable, T any] struct {
-	Enumerator[T]
-	key K
-}
-
-func (g grouping[K, T]) Key() K {
-	return g.key
+type Grouping[T any, K comparable] struct {
+	Enumerable Enumerable[T]
+	Key        K
 }
 
 type groupByEnumerator[T any, K comparable] struct {
-	src  Enumerator[T]
+	src  Enumerable[T]
 	ksel func(T) (K, error)
 
 	ks []K
@@ -25,14 +16,16 @@ type groupByEnumerator[T any, K comparable] struct {
 }
 
 // GroupBy groups the elements of a sequence according to a specified key selector function.
-func GroupBy[T any, K comparable](src Enumerator[T], keySelector func(T) (K, error)) Enumerator[Grouping[K, T]] {
-	return &groupByEnumerator[T, K]{
-		src:  src,
-		ksel: keySelector,
+func GroupBy[T any, K comparable, E IEnumerable[T]](src E, keySelector func(T) (K, error)) Enumerable[Grouping[T, K]] {
+	return func() Enumerator[Grouping[T, K]] {
+		return &groupByEnumerator[T, K]{
+			src:  Enumerable[T](src),
+			ksel: keySelector,
+		}
 	}
 }
 
-func (e *groupByEnumerator[T, K]) Next() (def Grouping[K, T], _ error) {
+func (e *groupByEnumerator[T, K]) Next() (def Grouping[T, K], _ error) {
 	if e.ks == nil {
 		ks := make([]K, 0)
 		m := make(map[K][]T)
@@ -60,8 +53,8 @@ func (e *groupByEnumerator[T, K]) Next() (def Grouping[K, T], _ error) {
 
 	k := e.ks[e.i]
 	e.i++
-	return grouping[K, T]{
-		Enumerator: FromSlice(e.m[k]),
-		key:        k,
+	return Grouping[T, K]{
+		Enumerable: FromSlice(e.m[k]),
+		Key:        k,
 	}, nil
 }

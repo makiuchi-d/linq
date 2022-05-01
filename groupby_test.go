@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestGroupBy(t *testing.T) {
@@ -22,13 +22,13 @@ func TestGroupBy(t *testing.T) {
 		'u': {"umbrella"},
 	}
 
-	linq.ForEach(e, func(grp linq.Grouping[byte, string]) error {
-		s, err := linq.ToSlice[string](
-			linq.OrderBy[string](grp, func(s string) (string, error) { return s, nil }))
+	linq.ForEach(e, func(grp linq.Grouping[string, byte]) error {
+		s, err := linq.ToSlice(
+			linq.OrderBy(grp.Enumerable, func(s string) (string, error) { return s, nil }))
 		if err != nil {
-			t.Fatalf("%c: %v", grp.Key(), err)
+			t.Fatalf("%c: %v", grp.Key, err)
 		}
-		k := grp.Key()
+		k := grp.Key
 		exp, ok := mexp[k]
 		if !ok {
 			t.Fatalf("invalid key: %c", k)
