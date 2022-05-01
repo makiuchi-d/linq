@@ -27,13 +27,3 @@ func Sumf[T constraints.Float, E IEnumerable[T]](src E) (float64, error) {
 	}
 	return sum, nil
 }
-
-// SumByFunc computes the sum of the sequence of values that are obtained by invoking a transform function on each element of the input sequence.
-func SumByFunc[T any, K constraints.Integer, E IEnumerable[T]](src E, selector func(v T) (K, error)) (int, error) {
-	return Sum(Select(src, selector))
-}
-
-// SumByFuncf computes the sum of the sequence of values that are obtained by invoking a transform function on each element of the input sequence.
-func SumByFuncf[T any, K constraints.Float, E IEnumerable[T]](src E, selector func(v T) (K, error)) (float64, error) {
-	return Sumf(Select(src, selector))
-}
