@@ -6,8 +6,10 @@ type selectEnumerator[S, T any] struct {
 }
 
 // Select projects each element of a sequence into a new form.
-func Select[S, T any](src Enumerator[S], selector func(v S) (T, error)) Enumerator[T] {
-	return &selectEnumerator[S, T]{src: src, sel: selector}
+func Select[S, T any, E IEnumerable[S]](src E, selector func(v S) (T, error)) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &selectEnumerator[S, T]{src: src(), sel: selector}
+	}
 }
 
 func (e *selectEnumerator[S, T]) Next() (def T, _ error) {

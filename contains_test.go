@@ -3,7 +3,7 @@ package linq_test
 import (
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestContains(t *testing.T) {

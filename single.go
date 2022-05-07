@@ -1,8 +1,8 @@
 package linq
 
-// Single returns the only element of a sequence that satisfies a specified condition, and return an error InvalidOperation if more than one such element exists.
-func Single[T any](src Enumerator[T], pred func(T) (bool, error)) (def T, _ error) {
-	e := Where(src, pred)
+// Single returns the only element of a sequence, and return an error InvalidOperation if more than one such element exists.
+func Single[T any, E IEnumerable[T]](src E) (def T, _ error) {
+	e := src()
 	v, err := e.Next()
 	if err != nil {
 		if isEOC(err) {
@@ -20,9 +20,9 @@ func Single[T any](src Enumerator[T], pred func(T) (bool, error)) (def T, _ erro
 	return v, nil
 }
 
-// SingleOrDefault returns the only element of a sequence that satisfies a specified condition, or a specified default value if no such element exists; this function returns an error InvalidOperation if more than one element satisfies the condition.
-func SingleOrDefault[T any](src Enumerator[T], pred func(T) (bool, error), defaultValue T) (def T, _ error) {
-	e := Where(src, pred)
+// SingleOrDefault returns the only element of a sequence, or a specified default value if no such element exists; this function returns an error InvalidOperation if more than one element satisfies the condition.
+func SingleOrDefault[T any, E IEnumerable[T]](src E, defaultValue T) (def T, _ error) {
+	e := src()
 	v, err := e.Next()
 	if err != nil {
 		if isEOC(err) {

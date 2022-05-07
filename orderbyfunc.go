@@ -10,13 +10,15 @@ type orderByFuncEnumerator[T any] struct {
 }
 
 // OrderByFunc sorts the elements of a sequence by the provided less function.
-func OrderByFunc[T any](src Enumerator[T], less func(a, b T) bool) Enumerator[T] {
-	return &orderByFuncEnumerator[T]{src: src, less: less}
+func OrderByFunc[T any, E IEnumerable[T]](src E, less func(a, b T) bool) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &orderByFuncEnumerator[T]{src: src(), less: less}
+	}
 }
 
 func (o *orderByFuncEnumerator[T]) Next() (def T, _ error) {
 	if o.sorted == nil {
-		s, err := ToSlice(o.src)
+		s, err := toSlice(o.src)
 		if err != nil {
 			return def, err
 		}

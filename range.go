@@ -7,8 +7,10 @@ type rangeEnumerator struct {
 }
 
 // Range generates a sequence of integral numbers within a specified range.
-func Range(start, count int) Enumerator[int] {
-	return &rangeEnumerator{st: start, cnt: count}
+func Range(start, count int) Enumerable[int] {
+	return func() Enumerator[int] {
+		return &rangeEnumerator{st: start, cnt: count}
+	}
 }
 
 func (e *rangeEnumerator) Next() (int, error) {

@@ -1,9 +1,10 @@
 package linq
 
 // All determines whether all elements of a sequence satisfy a condition.
-func All[T any](src Enumerator[T], pred func(v T) (bool, error)) (bool, error) {
+func All[T any, E IEnumerable[T]](src E, pred func(v T) (bool, error)) (bool, error) {
+	e := src()
 	for {
-		v, err := src.Next()
+		v, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return true, nil

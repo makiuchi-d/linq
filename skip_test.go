@@ -4,12 +4,12 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestSkip(t *testing.T) {
 	tests := []struct {
-		src linq.Enumerator[int]
+		src linq.Enumerable[int]
 		n   int
 		exp []int
 	}{

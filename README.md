@@ -8,7 +8,7 @@ This package provides the implementation of the LINQ functions for Go with type 
 ### Install
 
 ```Shell
-go get github.com/makiuchi-d/linq
+go get github.com/makiuchi-d/linq/v2
 ```
 
 ### Example
@@ -19,7 +19,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 type Student struct {
@@ -43,11 +43,11 @@ func main() {
 		{"稲井 隆生", "1-A", 495},
 	}
 
-	e := linq.FromSlice(students)
-	e = linq.Where(e, func(s Student) (bool, error) { return s.Class == "1-B", nil })
-	e = linq.OrderByDescending(e, func(s Student) (int, error) { return s.Score, nil })
+	e1 := linq.FromSlice(students)
+	e2 := linq.Where(e1, func(s Student) (bool, error) { return s.Class == "1-B", nil })
+	e3 := linq.OrderByDescending(e2, func(s Student) (int, error) { return s.Score, nil })
 
-	linq.ForEach(e, func(s Student) error {
+	linq.ForEach(e3, func(s Student) error {
 		fmt.Printf("%d %s\n", s.Score, s.Name)
 		return nil
 	})
@@ -156,7 +156,6 @@ _italics are unique to this package._
 
 - Aggregate
 - Average
-- _AverageFunc_
 - Count
 - Max
 - MaxBy
@@ -166,8 +165,6 @@ _italics are unique to this package._
 - _MinByFunc_
 - Sum
 - _Sumf_
-- _SumByFunc_
-- _SumByFuncf_
 
 #### Other
 

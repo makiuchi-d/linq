@@ -3,8 +3,9 @@ package linq
 import "golang.org/x/exp/constraints"
 
 // Maxby returns the maximum value in a sequence of values.
-func Max[T constraints.Ordered](src Enumerator[T]) (def T, _ error) {
-	max, err := src.Next()
+func Max[T constraints.Ordered, E IEnumerable[T]](src E) (def T, _ error) {
+	e := src()
+	max, err := e.Next()
 	if err != nil {
 		if isEOC(err) {
 			err = InvalidOperation
@@ -12,7 +13,7 @@ func Max[T constraints.Ordered](src Enumerator[T]) (def T, _ error) {
 		return def, err
 	}
 	for {
-		v, err := src.Next()
+		v, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return max, nil
@@ -29,8 +30,9 @@ func Max[T constraints.Ordered](src Enumerator[T]) (def T, _ error) {
 }
 
 // MaxBy returns the maximum value in a generic sequence according to a specified key selector function.
-func MaxBy[T any, K constraints.Ordered](src Enumerator[T], keySelector func(T) (K, error)) (def T, _ error) {
-	max, err := src.Next()
+func MaxBy[T any, K constraints.Ordered, E IEnumerable[T]](src E, keySelector func(T) (K, error)) (def T, _ error) {
+	e := src()
+	max, err := e.Next()
 	if err != nil {
 		if isEOC(err) {
 			err = InvalidOperation
@@ -42,7 +44,7 @@ func MaxBy[T any, K constraints.Ordered](src Enumerator[T], keySelector func(T) 
 		return def, err
 	}
 	for {
-		v, err := src.Next()
+		v, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return max, nil
@@ -60,8 +62,9 @@ func MaxBy[T any, K constraints.Ordered](src Enumerator[T], keySelector func(T) 
 }
 
 // MaxByFunc returns the maximum value in a generic sequence according to a comparer function.
-func MaxByFunc[T any](src Enumerator[T], greater func(a, b T) (bool, error)) (def T, _ error) {
-	max, err := src.Next()
+func MaxByFunc[T any, E IEnumerable[T]](src E, greater func(a, b T) (bool, error)) (def T, _ error) {
+	e := src()
+	max, err := e.Next()
 	if err != nil {
 		if isEOC(err) {
 			err = InvalidOperation
@@ -69,7 +72,7 @@ func MaxByFunc[T any](src Enumerator[T], greater func(a, b T) (bool, error)) (de
 		return def, err
 	}
 	for {
-		v, err := src.Next()
+		v, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return max, nil

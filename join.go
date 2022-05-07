@@ -14,19 +14,21 @@ type joinEnumerator[S1, S2, T any, K comparable] struct {
 }
 
 // Join correlates the elements of two sequences based on matching keys.
-func Join[S1, S2, T any, K comparable](
-	outer Enumerator[S1],
-	inner Enumerator[S2],
+func Join[S1, S2, T any, K comparable, E1 IEnumerable[S1], E2 IEnumerable[S2]](
+	outer E1,
+	inner E2,
 	outerKeySelector func(S1) (K, error),
 	innerKeySelector func(S2) (K, error),
 	resultSelector func(S1, S2) (T, error),
-) Enumerator[T] {
-	return &joinEnumerator[S1, S2, T, K]{
-		eOut:  outer,
-		eIn:   inner,
-		ksOut: outerKeySelector,
-		ksIn:  innerKeySelector,
-		rSel:  resultSelector,
+) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &joinEnumerator[S1, S2, T, K]{
+			eOut:  outer(),
+			eIn:   inner(),
+			ksOut: outerKeySelector,
+			ksIn:  innerKeySelector,
+			rSel:  resultSelector,
+		}
 	}
 }
 

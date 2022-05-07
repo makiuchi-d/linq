@@ -12,19 +12,18 @@ type mapEnumerator[K comparable, V any] struct {
 	i int
 }
 
-// FromMap generates an Enumerator[T] from a map.
-func FromMap[T ~map[K]V, K comparable, V any](m T) Enumerator[KeyValue[K, V]] {
-	return &mapEnumerator[K, V]{m: m}
+// FromMap generates an IEnumerable[T] from a map.
+func FromMap[T ~map[K]V, K comparable, V any](m T) Enumerable[KeyValue[K, V]] {
+	return func() Enumerator[KeyValue[K, V]] {
+		ks := make([]K, 0, len(m))
+		for k := range m {
+			ks = append(ks, k)
+		}
+		return &mapEnumerator[K, V]{m: m, k: ks}
+	}
 }
 
 func (e *mapEnumerator[K, V]) Next() (def KeyValue[K, V], _ error) {
-	if e.k == nil {
-		ks := make([]K, 0, len(e.m))
-		for k := range e.m {
-			ks = append(ks, k)
-		}
-		e.k = ks
-	}
 	if e.i >= len(e.k) {
 		return def, EOC
 	}
@@ -33,12 +32,13 @@ func (e *mapEnumerator[K, V]) Next() (def KeyValue[K, V], _ error) {
 	return KeyValue[K, V]{Key: k, Value: e.m[k]}, nil
 }
 
-// ToMap creates a map[K]V from an Enumerator[T].
+// ToMap creates a map[K]V from an IEnumerable[T].
 // T must be a type KeyValue[K, V].
-func ToMap[K comparable, V any](src Enumerator[KeyValue[K, V]]) (map[K]V, error) {
+func ToMap[K comparable, V any, E IEnumerable[KeyValue[K, V]]](src E) (map[K]V, error) {
+	e := src()
 	m := make(map[K]V)
 	for {
-		kv, err := src.Next()
+		kv, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return m, nil
@@ -50,11 +50,12 @@ func ToMap[K comparable, V any](src Enumerator[KeyValue[K, V]]) (map[K]V, error)
 	}
 }
 
-// ToMapFunc creates a map[K]V from an Enumerator[T] according to specified key-value selector function.
-func ToMapFunc[T any, K comparable, V any](src Enumerator[T], selector func(T) (K, V, error)) (map[K]V, error) {
+// ToMapFunc creates a map[K]V from an IEnumerable[T] according to specified key-value selector function.
+func ToMapFunc[T any, K comparable, V any, E IEnumerable[T]](src E, selector func(T) (K, V, error)) (map[K]V, error) {
+	e := src()
 	m := make(map[K]V)
 	for {
-		t, err := src.Next()
+		t, err := e.Next()
 		if err != nil {
 			if isEOC(err) {
 				return m, nil

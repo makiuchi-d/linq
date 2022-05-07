@@ -6,53 +6,60 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-// OrderedEnumerator is an implementation of Enumerator[T] which produces a sorted sequence.
-type OrderedEnumerator[T any] struct {
+type orderedEnumerator[T any] struct {
 	src     Enumerator[T]
 	newcmps []func([]T) (comparer, error)
 	sorted  []T
 	i       int
 }
 
-var _ Enumerator[int] = &OrderedEnumerator[int]{}
-
 // OrderBy sorts the elements of a sequence in ascending order according to a key.
-func OrderBy[T any, K constraints.Ordered](src Enumerator[T], keySelector func(T) (K, error)) *OrderedEnumerator[T] {
-	return &OrderedEnumerator[T]{
-		src: src,
-		newcmps: []func([]T) (comparer, error){
-			newKeyComparer[kCmpAsc[K]](keySelector),
-		},
+func OrderBy[T any, K constraints.Ordered, E IEnumerable[T]](src E, keySelector func(T) (K, error)) OrderedEnumerable[T] {
+	return func() Enumerator[T] {
+		return &orderedEnumerator[T]{
+			src: src(),
+			newcmps: []func([]T) (comparer, error){
+				newKeyComparer[kCmpAsc[K]](keySelector),
+			},
+		}
 	}
 }
 
 // OrderByDescending sorts the elements of a sequence in descending order according to a key.
-func OrderByDescending[T any, K constraints.Ordered](src Enumerator[T], keySelector func(T) (K, error)) *OrderedEnumerator[T] {
-	return &OrderedEnumerator[T]{
-		src: src,
-		newcmps: []func([]T) (comparer, error){
-			newKeyComparer[kCmpDesc[K]](keySelector),
-		},
+func OrderByDescending[T any, K constraints.Ordered, E IEnumerable[T]](src E, keySelector func(T) (K, error)) OrderedEnumerable[T] {
+	return func() Enumerator[T] {
+		return &orderedEnumerator[T]{
+			src: src(),
+			newcmps: []func([]T) (comparer, error){
+				newKeyComparer[kCmpDesc[K]](keySelector),
+			},
+		}
 	}
 }
 
 // ThenBy performs a subsequent ordering of the elements in a sequence in ascending order according to a key.
-func ThenBy[T any, K constraints.Ordered](src *OrderedEnumerator[T], keySelector func(T) (K, error)) *OrderedEnumerator[T] {
-	return &OrderedEnumerator[T]{
-		src:     src.src,
-		newcmps: append(src.newcmps, newKeyComparer[kCmpAsc[K]](keySelector)),
+func ThenBy[T any, K constraints.Ordered](src OrderedEnumerable[T], keySelector func(T) (K, error)) OrderedEnumerable[T] {
+	return func() Enumerator[T] {
+		oe := src().(*orderedEnumerator[T])
+		return &orderedEnumerator[T]{
+			src:     oe.src,
+			newcmps: append(oe.newcmps, newKeyComparer[kCmpAsc[K]](keySelector)),
+		}
 	}
 }
 
 // ThenByDescending performs a subsequent ordering of the elements in a sequence in descending order, according to a key.
-func ThenByDescending[T any, K constraints.Ordered](src *OrderedEnumerator[T], keySelector func(T) (K, error)) *OrderedEnumerator[T] {
-	return &OrderedEnumerator[T]{
-		src:     src.src,
-		newcmps: append(src.newcmps, newKeyComparer[kCmpDesc[K]](keySelector)),
+func ThenByDescending[T any, K constraints.Ordered](src OrderedEnumerable[T], keySelector func(T) (K, error)) OrderedEnumerable[T] {
+	return func() Enumerator[T] {
+		oe := src().(*orderedEnumerator[T])
+		return &orderedEnumerator[T]{
+			src:     oe.src,
+			newcmps: append(oe.newcmps, newKeyComparer[kCmpDesc[K]](keySelector)),
+		}
 	}
 }
 
-func (e *OrderedEnumerator[T]) Next() (def T, _ error) {
+func (e *orderedEnumerator[T]) Next() (def T, _ error) {
 	if e.sorted == nil {
 		s, err := doSort(e.src, e.newcmps)
 		if err != nil {
@@ -129,7 +136,7 @@ func (c kCmpDesc[K]) swap(i, j int) {
 }
 
 func doSort[T any](src Enumerator[T], newcmps []func([]T) (comparer, error)) ([]T, error) {
-	s, err := ToSlice(src)
+	s, err := toSlice(src)
 	if err != nil {
 		return nil, err
 	}

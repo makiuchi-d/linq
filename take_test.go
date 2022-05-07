@@ -4,12 +4,12 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestTake(t *testing.T) {
 	tests := []struct {
-		src linq.Enumerator[int]
+		src linq.Enumerable[int]
 		cnt int
 		exp []int
 	}{
@@ -44,7 +44,7 @@ func TestTakeWhile(t *testing.T) {
 
 func TestTakeLast(t *testing.T) {
 	tests := []struct {
-		src linq.Enumerator[int]
+		src linq.Enumerable[int]
 		n   int
 		exp []int
 	}{

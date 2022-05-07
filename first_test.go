@@ -4,16 +4,17 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestFirst(t *testing.T) {
 	src := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-	r, err := linq.First(linq.FromSlice(src),
-		func(v int) (bool, error) {
-			return (v > 5 && v%3 == 0), nil
-		})
+	r, err := linq.First(
+		linq.Where(linq.FromSlice(src),
+			func(v int) (bool, error) {
+				return (v > 5 && v%3 == 0), nil
+			}))
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
@@ -22,8 +23,7 @@ func TestFirst(t *testing.T) {
 		t.Fatalf("%v, wants %v", r, exp)
 	}
 
-	_, err = linq.First(linq.FromSlice(src),
-		func(v int) (bool, error) { return false, nil })
+	_, err = linq.First(linq.Empty[int]())
 	if !errors.Is(err, linq.InvalidOperation) {
 		t.Fatalf("%#v, wants %#v", err, linq.InvalidOperation)
 	}
@@ -33,9 +33,7 @@ func TestFirst(t *testing.T) {
 func TestFirstOrDefault(t *testing.T) {
 	src := []int{1, 2, 3}
 	def := 42
-	r, err := linq.FirstOrDefault(linq.FromSlice(src),
-		func(v int) (bool, error) { return false, nil },
-		def)
+	r, err := linq.FirstOrDefault(linq.Empty[int](), def)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
@@ -44,9 +42,7 @@ func TestFirstOrDefault(t *testing.T) {
 		t.Fatalf("%v, wants %v", r, exp)
 	}
 
-	r, err = linq.FirstOrDefault(linq.FromSlice(src),
-		func(v int) (bool, error) { return true, nil },
-		def)
+	r, err = linq.FirstOrDefault(linq.FromSlice(src), def)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}

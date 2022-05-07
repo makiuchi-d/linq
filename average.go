@@ -7,7 +7,7 @@ type Real interface {
 }
 
 // Average computes the average of a sequence of numeric (real number) values.
-func Average[T Real](src Enumerator[T]) (float64, error) {
+func Average[T Real, E IEnumerable[T]](src E) (float64, error) {
 	n := 0
 	t := float64(0)
 	err := ForEach(src, func(v T) error {
@@ -22,9 +22,4 @@ func Average[T Real](src Enumerator[T]) (float64, error) {
 		return 0, InvalidOperation
 	}
 	return t / float64(n), nil
-}
-
-// AverageFunc computes the average of a sequence of numeric values that are obtained by invoking a transform function on each element of the input sequence.
-func AverageFunc[T any, U Real](src Enumerator[T], selector func(T) (U, error)) (float64, error) {
-	return Average(Select(src, selector))
 }

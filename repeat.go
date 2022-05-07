@@ -6,8 +6,10 @@ type repeatEnumerator[T any] struct {
 }
 
 // Repeat generates a sequence that contains one repeated value.
-func Repeat[T any](v T, n int) Enumerator[T] {
-	return &repeatEnumerator[T]{v: v, n: n}
+func Repeat[T any](v T, n int) Enumerable[T] {
+	return func() Enumerator[T] {
+		return &repeatEnumerator[T]{v: v, n: n}
+	}
 }
 
 func (e *repeatEnumerator[T]) Next() (def T, _ error) {

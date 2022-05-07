@@ -4,15 +4,16 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/makiuchi-d/linq"
+	"github.com/makiuchi-d/linq/v2"
 )
 
 func TestLast(t *testing.T) {
 	src := []int{1, 2, 3, 4, 5, 6, 7}
-	r, err := linq.Last(linq.FromSlice(src),
-		func(v int) (bool, error) {
-			return v%2 == 0, nil
-		})
+	r, err := linq.Last(
+		linq.Where(linq.FromSlice(src),
+			func(v int) (bool, error) {
+				return v%2 == 0, nil
+			}))
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
@@ -21,8 +22,7 @@ func TestLast(t *testing.T) {
 		t.Fatalf("%v, wants %v", r, exp)
 	}
 
-	_, err = linq.Last(linq.FromSlice(src),
-		func(v int) (bool, error) { return false, nil })
+	_, err = linq.Last(linq.Empty[int]())
 	if !errors.Is(err, linq.InvalidOperation) {
 		t.Fatalf("%#v, wants %#v", err, linq.InvalidOperation)
 	}
@@ -31,9 +31,7 @@ func TestLast(t *testing.T) {
 func TestLastOrDefault(t *testing.T) {
 	src := []int{1, 2, 3}
 	def := 42
-	r, err := linq.LastOrDefault(linq.FromSlice(src),
-		func(v int) (bool, error) { return false, nil },
-		def)
+	r, err := linq.LastOrDefault(linq.Empty[int](), def)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
@@ -41,9 +39,7 @@ func TestLastOrDefault(t *testing.T) {
 	if r != exp {
 		t.Fatalf("%v, wants %v", r, exp)
 	}
-	r, err = linq.LastOrDefault(linq.FromSlice(src),
-		func(v int) (bool, error) { return true, nil },
-		def)
+	r, err = linq.LastOrDefault(linq.FromSlice(src), def)
 	if err != nil {
 		t.Fatalf("%v", err)
 	}
