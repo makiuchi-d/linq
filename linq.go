@@ -1,4 +1,4 @@
-// LINQ
+// LINQ for Go with type parameters
 package linq
 
 // IEnumerable[T] is a queryable collection.

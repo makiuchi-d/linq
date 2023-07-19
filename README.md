@@ -169,6 +169,7 @@ _italics are unique to this package._
 #### Other
 
 - _ForEach_
+- _Generator_
 
 ## C# LINQ Documents
 
