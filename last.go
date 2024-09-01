@@ -21,8 +21,10 @@ func Last[T any, E IEnumerable[T]](src E) (def T, _ error) {
 // LastOrDefault returns the last element of a sequence that satisfies a condition, or a specified default value if no such element is found.
 func LastOrDefault[T any, E IEnumerable[T]](src E, defaultValue T) (T, error) {
 	v, err := Last(src)
-	if isInvalidOperation(err) {
-		return defaultValue, nil
+	if err != nil {
+		if isInvalidOperation(err) {
+			return defaultValue, nil
+		}
 	}
 	return v, err
 }

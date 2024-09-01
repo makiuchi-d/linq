@@ -20,9 +20,6 @@ func Max[T constraints.Ordered, E IEnumerable[T]](src E) (def T, _ error) {
 			}
 			return def, err
 		}
-		if err != nil {
-			return def, err
-		}
 		if v > max {
 			max = v
 		}

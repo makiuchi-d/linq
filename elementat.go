@@ -19,8 +19,10 @@ func ElementAt[T any, E IEnumerable[T]](src E, n int) (def T, err error) {
 // ElementAtOrDefault returns the element at a specified index in a sequence or a default value if the index is out of range.
 func ElementAtOrDefault[T any, E IEnumerable[T]](src E, n int) (T, error) {
 	v, err := ElementAt(src, n)
-	if isOutOfRange(err) {
-		err = nil
+	if err != nil {
+		if isOutOfRange(err) {
+			err = nil
+		}
 	}
 	return v, err
 }
