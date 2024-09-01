@@ -47,15 +47,34 @@ func main() {
 	e2 := linq.Where(e1, func(s Student) (bool, error) { return s.Class == "1-B", nil })
 	e3 := linq.OrderByDescending(e2, func(s Student) (int, error) { return s.Score, nil })
 
-	linq.ForEach(e3, func(s Student) error {
+	// go1.23.0 or later
+	for s, err := range e3.All() {
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("%d %s\n", s.Score, s.Name)
+	}
+
+	fmt.Println("----")
+
+	// it also works in older go
+	err := linq.ForEach(e3, func(s Student) error {
 		fmt.Printf("%d %s\n", s.Score, s.Name)
 		return nil
 	})
+	if err != nil {
+		panic(err)
+	}
 }
 ```
 
 Output:
 ```
+594 三宅 直人
+425 山路 信之
+405 緒方 俊
+136 星 雅彦
+----
 594 三宅 直人
 425 山路 信之
 405 緒方 俊
