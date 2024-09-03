@@ -20,13 +20,11 @@ func iterAll[T any, E Enumerator[T]](e E) iter.Seq2[T, error] {
 				if isEOC(err) {
 					return
 				}
-			}
-
-			if !yield(v, err) {
+				yield(v, err)
 				return
 			}
 
-			if err != nil {
+			if !yield(v, nil) {
 				return
 			}
 		}
