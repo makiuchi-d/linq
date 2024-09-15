@@ -6,6 +6,14 @@ type KeyValue[K comparable, V any] struct {
 	Value V
 }
 
+// KV creates a KeyValue[K,V]
+func KV[K comparable, V any](k K, v V) KeyValue[K, V] {
+	return KeyValue[K, V]{
+		Key:   k,
+		Value: v,
+	}
+}
+
 type mapEnumerator[K comparable, V any] struct {
 	m map[K]V
 	k []K
@@ -29,7 +37,7 @@ func (e *mapEnumerator[K, V]) Next() (def KeyValue[K, V], _ error) {
 	}
 	k := e.k[e.i]
 	e.i++
-	return KeyValue[K, V]{Key: k, Value: e.m[k]}, nil
+	return KV(k, e.m[k]), nil
 }
 
 // ToMap creates a map[K]V from an IEnumerable[T].

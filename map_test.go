@@ -42,7 +42,7 @@ func TestSliceToMap(t *testing.T) {
 
 	e1 := linq.FromSlice(s)
 	e2 := linq.Select(e1, func(v byte) (linq.KeyValue[byte, string], error) {
-		return linq.KeyValue[byte, string]{v, fmt.Sprintf("%02x", v)}, nil
+		return linq.KV(v, fmt.Sprintf("%02x", v)), nil
 	})
 	m, err := linq.ToMap(e2)
 	if err != nil {
