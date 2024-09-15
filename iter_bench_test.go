@@ -9,9 +9,7 @@ import (
 	"github.com/makiuchi-d/linq/v2"
 )
 
-var src = linq.Where(
-	linq.Range(0, 10000),
-	func(v int) (bool, error) { return v%2 == 0, nil })
+var src = linq.Range(0, 100000)
 
 func BenchmarkFor(b *testing.B) {
 	for i := 0; i < b.N; i++ {
