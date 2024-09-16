@@ -9,8 +9,8 @@ import (
 
 // All returns an iterator function
 func (e Enumerable[T]) All() iter.Seq2[T, error] {
-	er := e()
 	return func(yield func(T, error) bool) {
+		er := e()
 		for {
 			v, err := er.Next()
 			if err != nil {
@@ -30,8 +30,8 @@ func (e Enumerable[T]) All() iter.Seq2[T, error] {
 
 // All returns an iterator function
 func (e OrderedEnumerable[T]) All() iter.Seq2[T, error] {
-	er := e()
 	return func(yield func(T, error) bool) {
+		er := e()
 		for {
 			v, err := er.Next()
 			if err != nil {
