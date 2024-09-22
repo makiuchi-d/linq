@@ -12,7 +12,7 @@ import (
 var src = linq.Range(0, 100000)
 
 func BenchmarkFor(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for range b.N {
 		e := src()
 		for {
 			_, err := e.Next()
@@ -26,7 +26,7 @@ func BenchmarkFor(b *testing.B) {
 }
 
 func BenchmarkForEach(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for range b.N {
 		linq.ForEach(src, func(n int) error {
 			return nil
 		})
@@ -34,7 +34,7 @@ func BenchmarkForEach(b *testing.B) {
 }
 
 func BenchmarkRangeFunc(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for range b.N {
 		for _, _ = range src.All() {
 		}
 	}
